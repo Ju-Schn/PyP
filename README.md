@@ -1,5 +1,5 @@
-# Welcome to PuP - Post ur Pictures
+# Welcome to PyP - Post your Pictures
 
-Upload and manage ur pictures wherever u want!
+Upload and manage your pictures wherever you want!
 
 ## Under construction - More information is going to be provided soon
