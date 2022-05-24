@@ -16,4 +16,17 @@ Default.args = {
 export const Submit = Template.bind({})
 Submit.args = {
   children: 'Submit',
+  variant: 'submit',
+}
+
+export const FullWidth = Template.bind({})
+FullWidth.args = {
+  children: 'FullWidth',
+  variant: 'fullWidth',
+}
+
+export const Center = Template.bind({})
+Center.args = {
+  children: 'center',
+  variant: 'center',
 }
