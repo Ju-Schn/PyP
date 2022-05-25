@@ -25,8 +25,11 @@ export default styled.button`
     `}
 
     ${props =>
-    props.variant === 'center' &&
+    props.variant === 'more' &&
     css`
-      align-self: center;
+      display: flex;
+      justify-content: center;
+      margin: 8px 16px 0 16px;
+      padding: 16px;
     `}
 `

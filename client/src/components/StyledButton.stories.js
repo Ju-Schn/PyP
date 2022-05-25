@@ -25,8 +25,8 @@ FullWidth.args = {
   variant: 'fullWidth',
 }
 
-export const Center = Template.bind({})
-Center.args = {
-  children: 'center',
-  variant: 'center',
+export const More = Template.bind({})
+More.args = {
+  children: 'show more',
+  variant: 'more',
 }
