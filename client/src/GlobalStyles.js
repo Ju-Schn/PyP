@@ -8,7 +8,7 @@ export default createGlobalStyle`
 
 body {
   margin: 0;
-  padding: 8px;;
+  padding: 0;
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
   color: #223240;
