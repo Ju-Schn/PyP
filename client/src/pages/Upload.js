@@ -1,10 +1,12 @@
-import StyledButton from './components/StyledButton'
-import { ReactComponent as UploadIcon } from './svg/upload.svg'
-import { ReactComponent as ChooseIcon } from './svg/choose.svg'
+import StyledButton from '../components/StyledButton'
+import { ReactComponent as UploadIcon } from '../svg/upload.svg'
+import { ReactComponent as ChooseIcon } from '../svg/choose.svg'
+import Navigation from '../components/Navigation'
 
 import { useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+
 
 export default function Upload() {
   const [previewSource, setPreviewSource] = useState('')
@@ -33,6 +35,7 @@ export default function Upload() {
           <img src={previewSource} alt="chosen" style={{ width: '250px' }} />
         </FlexWrapper>
       )}
+      <Navigation />
     </>
   )
 

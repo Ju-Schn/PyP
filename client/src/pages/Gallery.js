@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react'
 import getImages from '../api'
 
 import StyledButton from '../components/StyledButton'
-import { ReactComponent as MoreIcon } from './svg/more.svg'
-import { ReactComponent as SynchroIcon } from './svg/synchronize.svg'
+import { ReactComponent as MoreIcon } from '../svg/more.svg'
+import { ReactComponent as SynchroIcon } from '../svg/synchronize.svg'
+import Navigation from '../components/Navigation'
 
 export default function Gallery() {
   const [imageList, setImageList] = useState([])
@@ -39,6 +40,7 @@ export default function Gallery() {
           </StyledButton>
         )}
       </GalleryWrapper>
+      <Navigation />
     </>
   )
 
