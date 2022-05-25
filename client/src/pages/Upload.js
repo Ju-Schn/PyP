@@ -6,39 +6,37 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
-
-
 export default function Upload() {
+  const [previewSource, setPreviewSource] = useState('')
 
-    const [previewSource, setPreviewSource] = useState('')
+  return (
+    <>
+      <StyledTitle>PyP - Post your Pictures</StyledTitle>
+      <FlexContainer arialabbeledby="form-title" onSubmit={handleSubmitFile}>
+        <StyledLabel id="form-title" htmlFor="file">
+          <ChooseIcon aria-hidden="true" /> Choose a file
+        </StyledLabel>
+        <HiddenInput
+          id="file"
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={handleFileInputChange}
+        />
+        <StyledButton variant="submit">
+          <UploadIcon aria-hidden="true" /> upload
+        </StyledButton>
+      </FlexContainer>
+      {previewSource && (
+        <FlexWrapper>
+          <StyledText>Preview</StyledText>
+          <img src={previewSource} alt="chosen" style={{ width: '250px' }} />
+        </FlexWrapper>
+      )}
+    </>
+  )
 
-    return <>
-    <StyledTitle>PyP - Post your Pictures</StyledTitle>
-    <FlexContainer arialabbeledby="form-title" onSubmit={handleSubmitFile}>
-      <StyledLabel id="form-title" htmlFor="file">
-        <ChooseIcon aria-hidden="true" /> Choose a file
-      </StyledLabel>
-      <HiddenInput
-        id="file"
-        type="file"
-        name="image"
-        accept="image/*"
-        onChange={handleFileInputChange}
-      />
-      <StyledButton variant="submit">
-        <UploadIcon aria-hidden="true" /> upload
-      </StyledButton>
-    </FlexContainer>
-    {previewSource && (
-      <FlexWrapper>
-        <StyledText>Preview</StyledText>
-        <img src={previewSource} alt="chosen" style={{ width: '250px' }} />
-      </FlexWrapper>
-    )}
-    
-  </>
-
-function handleFileInputChange(event) {
+  function handleFileInputChange(event) {
     const file = event.target.files[0]
     previewFile(file)
   }
@@ -75,8 +73,6 @@ const StyledTitle = styled.h1`
   margin-bottom: 16px;
   text-align: center;
 `
-
-
 
 const FlexWrapper = styled.div`
   display: flex;

@@ -1,28 +1,29 @@
-import styled from "styled-components"
-import { useEffect, useState } from "react"
+import styled from 'styled-components'
+import { useEffect, useState } from 'react'
 
 import getImages from '../api'
 
-import StyledButton from "../components/StyledButton"
+import StyledButton from '../components/StyledButton'
 import { ReactComponent as MoreIcon } from './svg/more.svg'
 import { ReactComponent as SynchroIcon } from './svg/synchronize.svg'
 
 export default function Gallery() {
-    const [imageList, setImageList] = useState([])
-    const [nextCursor, setNextCursor] = useState(null)
+  const [imageList, setImageList] = useState([])
+  const [nextCursor, setNextCursor] = useState(null)
 
-    useEffect(() => {
-        const fetchData = async () => {
-          const responseJson = await getImages()
-          setImageList(responseJson.resources)
-          setNextCursor(responseJson.next_cursor)
-        }
-    
-        fetchData()
-      }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+      const responseJson = await getImages()
+      setImageList(responseJson.resources)
+      setNextCursor(responseJson.next_cursor)
+    }
 
-    return <>
-    <GalleryWrapper>
+    fetchData()
+  }, [])
+
+  return (
+    <>
+      <GalleryWrapper>
         <StyledButton onClick={synchronizeData} variant="fullWidth">
           <SynchroIcon aria-hidden="true" /> synchronize
         </StyledButton>
@@ -38,9 +39,10 @@ export default function Gallery() {
           </StyledButton>
         )}
       </GalleryWrapper>
-      </>
+    </>
+  )
 
-async function handleLoadMoreButtonClick() {
+  async function handleLoadMoreButtonClick() {
     const responseJson = await getImages(nextCursor)
     setImageList(currentImageList => [
       ...currentImageList,
