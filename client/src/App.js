@@ -1,27 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
-import getImages from './api'
+
 import StyledButton from './components/StyledButton'
 import { ReactComponent as UploadIcon } from './svg/upload.svg'
-import { ReactComponent as SynchroIcon } from './svg/synchronize.svg'
 import { ReactComponent as ChooseIcon } from './svg/choose.svg'
-import { ReactComponent as MoreIcon } from './svg/more.svg'
+
 
 function App() {
-  const [imageList, setImageList] = useState([])
-  const [nextCursor, setNextCursor] = useState(null)
+
   const [previewSource, setPreviewSource] = useState('')
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const responseJson = await getImages()
-      setImageList(responseJson.resources)
-      setNextCursor(responseJson.next_cursor)
-    }
 
-    fetchData()
-  }, [])
 
   return (
     <>
@@ -47,33 +37,11 @@ function App() {
           <img src={previewSource} alt="chosen" style={{ width: '250px' }} />
         </FlexWrapper>
       )}
-      <GalleryWrapper>
-        <StyledButton onClick={synchronizeData} variant="fullWidth">
-          <SynchroIcon aria-hidden="true" /> synchronize
-        </StyledButton>
-
-        <GridContainer>
-          {imageList.map(image => (
-            <img key={image.asset_id} src={image.url} alt={image.publicId} />
-          ))}
-        </GridContainer>
-        {nextCursor && (
-          <StyledButton onClick={handleLoadMoreButtonClick} variant="center">
-            <MoreIcon aria-hidden="true" /> Load More
-          </StyledButton>
-        )}
-      </GalleryWrapper>
+      
     </>
   )
 
-  async function handleLoadMoreButtonClick() {
-    const responseJson = await getImages(nextCursor)
-    setImageList(currentImageList => [
-      ...currentImageList,
-      ...responseJson.resources,
-    ])
-    setNextCursor(responseJson.next_cursor)
-  }
+
 
   function handleFileInputChange(event) {
     const file = event.target.files[0]
@@ -107,9 +75,7 @@ function App() {
     setPreviewSource('')
   }
 
-  function synchronizeData() {
-    window.location.reload()
-  }
+ 
 }
 
 const StyledTitle = styled.h1`
@@ -117,17 +83,7 @@ const StyledTitle = styled.h1`
   text-align: center;
 `
 
-const GridContainer = styled.div`
-  display: grid;
-  gap: 8px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -170,10 +126,6 @@ const StyledLabel = styled.label`
   cursor: pointer;
 `
 
-const GalleryWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`
+
 
 export default App
