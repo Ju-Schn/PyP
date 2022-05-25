@@ -20,7 +20,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 input, label, textarea {
-  font-size: 1em
+  font-size: 1em;
+  font-family: inherit;
 }
 
 button {

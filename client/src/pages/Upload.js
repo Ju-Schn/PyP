@@ -14,10 +14,10 @@ export default function Upload() {
   return (
     <>
       <StyledTitle>PyP - Upload your Pictures</StyledTitle>
-      <FlexContainer arialabbeledby="form-title" onSubmit={handleSubmitFile}>
-        <StyledLabel id="form-title" htmlFor="file">
+      <FlexForm arialabbeledby="form-title" onSubmit={handleSubmitFile}>
+        <StyledFileLabel id="form-title" htmlFor="file">
           <ChooseIcon aria-hidden="true" /> Choose a file
-        </StyledLabel>
+        </StyledFileLabel>
         <HiddenInput
           id="file"
           type="file"
@@ -25,16 +25,19 @@ export default function Upload() {
           accept="image/*"
           onChange={handleFileInputChange}
         />
-        <StyledButton variant="submit">
-          <UploadIcon aria-hidden="true" /> upload
-        </StyledButton>
-      </FlexContainer>
-      {previewSource && (
+        {previewSource && (
         <FlexWrapper>
           <StyledText>Preview</StyledText>
           <img src={previewSource} alt="chosen" style={{ width: '250px' }} />
         </FlexWrapper>
       )}
+        <StyledLabel htmlFor='tags'>Place up to three tags, devided by comma:</StyledLabel>
+        <StyledInput id='tags' type='text' name='tags' placeholder='e.g. Bali, 2022, Vacation' />
+        <StyledButton variant="submit">
+          <UploadIcon aria-hidden="true" /> upload
+        </StyledButton>
+      </FlexForm>
+      
       <Navigation />
     </>
   )
@@ -80,11 +83,12 @@ const FlexWrapper = styled.div`
   margin-bottom: 32px;
 `
 
-const FlexContainer = styled.form`
+const FlexForm = styled.form`
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 16px;
   justify-content: center;
-  margin-bottom: 16px;
+  margin: 16px;
 `
 
 const StyledText = styled.span`
@@ -101,14 +105,31 @@ const HiddenInput = styled.input`
   z-index: -1;
 `
 
-const StyledLabel = styled.label`
+const StyledFileLabel = styled.label`
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 8px;
   border-radius: 30px;
   background-color: #223240;
   color: #93d94e;
   padding: 8px 16px;
+  margin-bottom: 16px;
   font-weight: 600;
   cursor: pointer;
 `
+
+const StyledInput = styled.input`
+margin: 0 16px 16px 16px;
+padding: 16px;
+border-radius: 30px;
+border:none;
+height: 50px;
+background-color: rgb(34,50,64, 0.90);
+color: #93D94E;
+box-shadow: inset 0px -4px 4px rgba(147,217,78 ,1);
+`
+
+const StyledLabel = styled.label`
+font-size: 16px;
+font-weight: 600;`
