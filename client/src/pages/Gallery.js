@@ -23,23 +23,21 @@ export default function Gallery() {
   }, [])
 
   return (
-    <>
-    
-       
-<StyledTitle>PyP - Your Gallery</StyledTitle>
-        <GridContainer>
-          {imageList.map(image => (
-            <img key={image.asset_id} src={image.url} alt={image.publicId} />
-          ))}
-        </GridContainer>
-        {nextCursor && (
-          <StyledButton onClick={handleLoadMoreButtonClick} variant="center">
-            <MoreIcon aria-hidden="true" /> Load More
-          </StyledButton>
-        )}
-      
+    <GridContatiner>
+      <StyledTitle>PyP - Your Gallery</StyledTitle>
+      <GalleryGrid>
+        {imageList.map(image => (
+          <img key={image.asset_id} src={image.url} alt={image.publicId} />
+        ))}
+      </GalleryGrid>
+      {nextCursor && (
+        <StyledButton onClick={handleLoadMoreButtonClick} variant="more">
+          <MoreIcon aria-hidden="true" /> Load More
+        </StyledButton>
+      )}
+
       <Navigation />
-    </>
+    </GridContatiner>
   )
 
   async function handleLoadMoreButtonClick() {
@@ -50,16 +48,14 @@ export default function Gallery() {
     ])
     setNextCursor(responseJson.next_cursor)
   }
-
-  function synchronizeData() {
-    window.location.reload()
-  }
 }
 
-const GridContainer = styled.div`
+const GalleryGrid = styled.div`
   display: grid;
   gap: 8px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  overflow-y: auto;
+  margin: 0 16px;
 
   img {
     width: 100%;
@@ -68,8 +64,7 @@ const GridContainer = styled.div`
   }
 `
 
-const GalleryWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+const GridContatiner = styled.div`
+  display: grid;
+  grid-template-rows: 48px auto 48px 88px;
 `

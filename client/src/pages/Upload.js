@@ -8,7 +8,6 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
-
 export default function Upload() {
   const [previewSource, setPreviewSource] = useState('')
 
@@ -72,8 +71,6 @@ export default function Upload() {
     setPreviewSource('')
   }
 }
-
-
 
 const FlexWrapper = styled.div`
   display: flex;

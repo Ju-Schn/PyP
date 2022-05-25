@@ -38,10 +38,11 @@ const StyledLink = styled(NavLink)`
 `
 
 const StyledNav = styled.div`
-display: flex;
+  display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
   font-size: 90%;
   width: 100%;
   position: fixed;
-  bottom: 0;`
+  bottom: 0;
+`
