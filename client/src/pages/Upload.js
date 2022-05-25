@@ -2,6 +2,7 @@ import StyledButton from '../components/StyledButton'
 import { ReactComponent as UploadIcon } from '../svg/upload.svg'
 import { ReactComponent as ChooseIcon } from '../svg/choose.svg'
 import Navigation from '../components/Navigation'
+import StyledTitle from '../components/StyledTitle'
 
 import { useState } from 'react'
 import styled from 'styled-components'
@@ -13,7 +14,7 @@ export default function Upload() {
 
   return (
     <>
-      <StyledTitle>PyP - Post your Pictures</StyledTitle>
+      <StyledTitle>PyP - Upload your Pictures</StyledTitle>
       <FlexContainer arialabbeledby="form-title" onSubmit={handleSubmitFile}>
         <StyledLabel id="form-title" htmlFor="file">
           <ChooseIcon aria-hidden="true" /> Choose a file
@@ -72,10 +73,7 @@ export default function Upload() {
   }
 }
 
-const StyledTitle = styled.h1`
-  margin-bottom: 16px;
-  text-align: center;
-`
+
 
 const FlexWrapper = styled.div`
   display: flex;

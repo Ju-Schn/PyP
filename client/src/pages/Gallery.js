@@ -5,8 +5,8 @@ import getImages from '../api'
 
 import StyledButton from '../components/StyledButton'
 import { ReactComponent as MoreIcon } from '../svg/more.svg'
-import { ReactComponent as SynchroIcon } from '../svg/synchronize.svg'
 import Navigation from '../components/Navigation'
+import StyledTitle from '../components/StyledTitle'
 
 export default function Gallery() {
   const [imageList, setImageList] = useState([])
@@ -24,11 +24,9 @@ export default function Gallery() {
 
   return (
     <>
-      <GalleryWrapper>
-        <StyledButton onClick={synchronizeData} variant="fullWidth">
-          <SynchroIcon aria-hidden="true" /> synchronize
-        </StyledButton>
-
+    
+       
+<StyledTitle>PyP - Your Gallery</StyledTitle>
         <GridContainer>
           {imageList.map(image => (
             <img key={image.asset_id} src={image.url} alt={image.publicId} />
@@ -39,7 +37,7 @@ export default function Gallery() {
             <MoreIcon aria-hidden="true" /> Load More
           </StyledButton>
         )}
-      </GalleryWrapper>
+      
       <Navigation />
     </>
   )
