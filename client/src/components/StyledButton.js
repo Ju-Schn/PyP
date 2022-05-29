@@ -16,7 +16,7 @@ export default styled.button`
       background-color: #93d94e;
       color: #223240;
       justify-content: center;
-  align-items: center;
+      align-items: center;
     `}
 
   ${props =>
