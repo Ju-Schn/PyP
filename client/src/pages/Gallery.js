@@ -13,6 +13,7 @@ export default function Gallery() {
   const [imageList, setImageList] = useState([]);
   const [nextCursor, setNextCursor] = useState(null);
   const [allTags, setAllTags] = useState([]);
+  const [selectedTag, setSelectedTag] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,11 +36,17 @@ export default function Gallery() {
   return (
     <GridContatiner>
       <StyledTitle>PyP - Your Gallery</StyledTitle>
-      <label htmlFor='tagsFilter'>
+      <label htmlFor="tagsFilter">
         <ScreenReaderOnly>Filter by tag:</ScreenReaderOnly>
       </label>
-      <select id='tagsFilter'>
-        <option>Choose a tag to filter:</option>
+      <select
+        onChange={handleChange}
+        id="tagsFilter"
+        name="tags"
+        type="text"
+        value={selectedTag}
+      >
+        <option value="">Choose a tag to filter:</option>
         {allTags?.map(tag => (
           <option key={tag} value={tag}>
             {tag}
@@ -59,6 +66,11 @@ export default function Gallery() {
       <Navigation />
     </GridContatiner>
   );
+
+  function handleChange(event) {
+    event.preventDefault();
+    setSelectedTag(event.target.value);
+  }
 
   async function handleLoadMoreButtonClick() {
     const responseJson = await getImages(nextCursor);
