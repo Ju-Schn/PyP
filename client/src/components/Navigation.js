@@ -8,10 +8,10 @@ export default function Navigation() {
   return (
     <StyledNav>
       <StyledLink to="/">
-        <GalleryIcon aria-hidden="true"/> Gallery
+        <GalleryIcon aria-hidden="true" /> Gallery
       </StyledLink>
       <StyledLink to="/upload">
-        <UploadIcon aria-hidden="true"/>
+        <UploadIcon aria-hidden="true" />
         Upload
       </StyledLink>
     </StyledNav>

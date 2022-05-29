@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 
-import getImages from '../api'
+import { getImages } from '../api'
 
 import StyledButton from '../components/StyledButton'
 import { ReactComponent as MoreIcon } from '../svg/more.svg'
@@ -18,7 +18,6 @@ export default function Gallery() {
       setImageList(responseJson.resources)
       setNextCursor(responseJson.next_cursor)
     }
-
     fetchData()
   }, [])
 
@@ -35,7 +34,6 @@ export default function Gallery() {
           <MoreIcon aria-hidden="true" /> Load More
         </StyledButton>
       )}
-
       <Navigation />
     </GridContatiner>
   )
