@@ -35,10 +35,10 @@ export default function Gallery() {
   return (
     <GridContatiner>
       <StyledTitle>PyP - Your Gallery</StyledTitle>
-      <label>
+      <label htmlFor='tagsFilter'>
         <ScreenReaderOnly>Filter by tag:</ScreenReaderOnly>
       </label>
-      <select>
+      <select id='tagsFilter'>
         <option>Choose a tag to filter:</option>
         {allTags?.map(tag => (
           <option key={tag} value={tag}>
