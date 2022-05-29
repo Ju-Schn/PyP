@@ -19,7 +19,7 @@ const auth = {
 };
 
 app.get("/photos", async (req, res) => {
-  const response = await axios.get(BASE_URL + '/resources/image/', {
+  const response = await axios.get(BASE_URL + "/resources/image/", {
     auth,
     params: {
       next_cursor: req.query.next_cursor,
@@ -28,10 +28,22 @@ app.get("/photos", async (req, res) => {
   return res.send(response.data);
 });
 
-app.get("/tags", async (req, res) => {
-  const response = await axios.get(BASE_URL + '/tags/image/', {
+app.get("/tags", async (res) => {
+  const response = await axios.get(BASE_URL + "/tags/image/", {
     auth,
   });
+  return res.send(response.data);
+});
+
+app.get("/search", async (req, res) => {
+  const response = await axios.get(BASE_URL + "/resources/search", {
+    auth,
+    params: {
+      expression: req.query.expression,
+      with_field: req.query.tags,
+    },
+  });
+
   return res.send(response.data);
 });
 
