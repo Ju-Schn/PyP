@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export default styled.button`
   display: flex;
@@ -15,6 +15,8 @@ export default styled.button`
     css`
       background-color: #93d94e;
       color: #223240;
+      justify-content: center;
+      align-items: center;
     `}
 
   ${props =>
@@ -25,8 +27,11 @@ export default styled.button`
     `}
 
     ${props =>
-    props.variant === 'center' &&
+    props.variant === 'more' &&
     css`
-      align-self: center;
+      display: flex;
+      justify-content: center;
+      margin: 8px 16px 0 16px;
+      padding: 16px;
     `}
-`
+`;

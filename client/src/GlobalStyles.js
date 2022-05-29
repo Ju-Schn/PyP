@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 * {
@@ -8,7 +8,7 @@ export default createGlobalStyle`
 
 body {
   margin: 0;
-  padding: 8px;;
+  padding: 0;
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
   color: #223240;
@@ -20,7 +20,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 input, label, textarea {
-  font-size: 1em
+  font-size: 1em;
+  font-family: inherit;
 }
 
 button {
@@ -33,4 +34,4 @@ button {
   cursor: pointer;
   outline: inherit;
 
-}`
+}`;
