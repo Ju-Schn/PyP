@@ -10,6 +10,7 @@ import axios from 'axios'
 
 export default function Upload() {
   const [previewSource, setPreviewSource] = useState('')
+  const [tagsList, setTagsList] = useState([])
 
   return (
     <>
@@ -26,21 +27,37 @@ export default function Upload() {
           onChange={handleFileInputChange}
         />
         {previewSource && (
-        <FlexWrapper>
-          <StyledText>Preview</StyledText>
-          <img src={previewSource} alt="chosen" style={{ width: '250px' }} />
-        </FlexWrapper>
-      )}
-        <StyledLabel htmlFor='tags'>Place up to three tags, devided by comma:</StyledLabel>
-        <StyledInput id='tags' type='text' name='tags' placeholder='e.g. Bali, 2022, Vacation' />
+          <FlexWrapper>
+            <StyledText>Preview</StyledText>
+            <img src={previewSource} alt="chosen" style={{ width: '250px' }} />
+          </FlexWrapper>
+        )}
+        <StyledLabel htmlFor="tags">
+          Place up to three tags, devided by comma:
+        </StyledLabel>
+        <StyledInput
+          id="tags"
+          type="text"
+          name="tags"
+          placeholder="e.g. Bali, 2022, Vacation"
+          onChange={handleChange}
+        />
         <StyledButton variant="submit">
           <UploadIcon aria-hidden="true" /> upload
         </StyledButton>
       </FlexForm>
-      
       <Navigation />
     </>
   )
+
+  function handleChange(event) {
+    const rawTags = event.target.value
+    const tags = rawTags
+      .split(',')
+      .map(tag => tag.trim())
+      .filter(tag => tag.length)
+    setTagsList(tags)
+  }
 
   function handleFileInputChange(event) {
     const file = event.target.files[0]
@@ -57,21 +74,24 @@ export default function Upload() {
 
   function handleSubmitFile(event) {
     event.preventDefault()
+    const form = event.target
     if (!previewSource) return
     uploadImage()
+    form.reset()
   }
 
   function uploadImage() {
-    console.log(previewSource)
     const formData = new FormData()
     formData.append('file', previewSource)
     formData.append('upload_preset', 'rkqvotof')
+    formData.append('tags', tagsList)
 
     axios.post(
       'https://api.cloudinary.com/v1_1/dkti3sjec/image/upload/',
       formData
     )
     setPreviewSource('')
+    setTagsList([])
   }
 }
 
@@ -120,16 +140,17 @@ const StyledFileLabel = styled.label`
 `
 
 const StyledInput = styled.input`
-margin: 0 16px 16px 16px;
-padding: 16px;
-border-radius: 30px;
-border:none;
-height: 50px;
-background-color: rgb(34,50,64, 0.90);
-color: #93D94E;
-box-shadow: inset 0px -4px 4px rgba(147,217,78 ,1);
+  margin: 0 16px 16px 16px;
+  padding: 16px;
+  border-radius: 30px;
+  border: none;
+  height: 50px;
+  background-color: rgb(34, 50, 64, 0.9);
+  color: #93d94e;
+  box-shadow: inset 0px -4px 4px rgba(147, 217, 78, 1);
 `
 
 const StyledLabel = styled.label`
-font-size: 16px;
-font-weight: 600;`
+  font-size: 16px;
+  font-weight: 600;
+`
