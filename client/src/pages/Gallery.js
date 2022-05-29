@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
-import { getImages } from '../api';
+import { getImages, getTags } from '../api';
 
 import StyledButton from '../components/StyledButton';
 import { ReactComponent as MoreIcon } from '../svg/more.svg';
 import Navigation from '../components/Navigation';
 import StyledTitle from '../components/StyledTitle';
+import ScreenReaderOnly from '../components/ScreenReaderOnly';
 
 export default function Gallery() {
   const [imageList, setImageList] = useState([]);
   const [nextCursor, setNextCursor] = useState(null);
+  const [allTags, setAllTags] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,9 +23,29 @@ export default function Gallery() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const responseJson = await getTags();
+      setAllTags(responseJson.tags);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <GridContatiner>
       <StyledTitle>PyP - Your Gallery</StyledTitle>
+      <label>
+        <ScreenReaderOnly>Filter by tag:</ScreenReaderOnly>
+      </label>
+      <select>
+        <option>Choose a tag to filter:</option>
+        {allTags?.map(tag => (
+          <option key={tag} value={tag}>
+            {tag}
+          </option>
+        ))}
+      </select>
       <GalleryGrid>
         {imageList.map(image => (
           <img key={image.asset_id} src={image.url} alt={image.publicId} />
@@ -64,5 +86,5 @@ const GalleryGrid = styled.div`
 
 const GridContatiner = styled.div`
   display: grid;
-  grid-template-rows: 48px auto 48px 88px;
+  grid-template-rows: 64px 0 40px auto 48px 88px;
 `;
