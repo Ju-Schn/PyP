@@ -12,3 +12,11 @@ export async function getImages(nextCursor) {
 
   return responseJson;
 }
+
+export async function getTags() {
+  const params = new URLSearchParams();
+  const response = await fetch(`${API_URL}/tags?${params}`);
+  const responseJson = await response.json();
+
+  return responseJson;
+}
