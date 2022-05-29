@@ -1,16 +1,16 @@
-import StyledButton from '../components/StyledButton'
-import { ReactComponent as UploadIcon } from '../svg/upload.svg'
-import { ReactComponent as ChooseIcon } from '../svg/choose.svg'
-import Navigation from '../components/Navigation'
-import StyledTitle from '../components/StyledTitle'
+import StyledButton from '../components/StyledButton';
+import { ReactComponent as UploadIcon } from '../svg/upload.svg';
+import { ReactComponent as ChooseIcon } from '../svg/choose.svg';
+import Navigation from '../components/Navigation';
+import StyledTitle from '../components/StyledTitle';
 
-import { useState } from 'react'
-import styled from 'styled-components'
-import axios from 'axios'
+import { useState } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
 
 export default function Upload() {
-  const [previewSource, setPreviewSource] = useState('')
-  const [tagsList, setTagsList] = useState([])
+  const [previewSource, setPreviewSource] = useState('');
+  const [tagsList, setTagsList] = useState([]);
 
   return (
     <>
@@ -43,55 +43,56 @@ export default function Upload() {
           onChange={handleChange}
         />
         <StyledButton variant="submit">
-          <UploadIcon aria-hidden="true" /> upload
+          <UploadIcon aria-hidden="true" />
+          upload
         </StyledButton>
       </FlexForm>
       <Navigation />
     </>
-  )
+  );
 
   function handleChange(event) {
-    const rawTags = event.target.value
+    const rawTags = event.target.value;
     const tags = rawTags
       .split(',')
       .map(tag => tag.trim())
-      .filter(tag => tag.length)
-    setTagsList(tags)
+      .filter(tag => tag.length);
+    setTagsList(tags);
   }
 
   function handleFileInputChange(event) {
-    const file = event.target.files[0]
-    previewFile(file)
+    const file = event.target.files[0];
+    previewFile(file);
   }
 
   function previewFile(file) {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result)
-    }
+      setPreviewSource(reader.result);
+    };
   }
 
   function handleSubmitFile(event) {
-    event.preventDefault()
-    const form = event.target
-    if (!previewSource) return
-    uploadImage()
-    form.reset()
+    event.preventDefault();
+    const form = event.target;
+    if (!previewSource) return;
+    uploadImage();
+    form.reset();
   }
 
   function uploadImage() {
-    const formData = new FormData()
-    formData.append('file', previewSource)
-    formData.append('upload_preset', 'rkqvotof')
-    formData.append('tags', tagsList)
+    const formData = new FormData();
+    formData.append('file', previewSource);
+    formData.append('upload_preset', 'rkqvotof');
+    formData.append('tags', tagsList);
 
     axios.post(
       'https://api.cloudinary.com/v1_1/dkti3sjec/image/upload/',
       formData
-    )
-    setPreviewSource('')
-    setTagsList([])
+    );
+    setPreviewSource('');
+    setTagsList([]);
   }
 }
 
@@ -101,7 +102,7 @@ const FlexWrapper = styled.div`
   align-items: center;
   gap: 8px;
   margin-bottom: 32px;
-`
+`;
 
 const FlexForm = styled.form`
   display: flex;
@@ -109,12 +110,12 @@ const FlexForm = styled.form`
   gap: 16px;
   justify-content: center;
   margin: 16px;
-`
+`;
 
 const StyledText = styled.span`
   font-weight: 600;
   font-size: 24px;
-`
+`;
 
 const HiddenInput = styled.input`
   width: 0.1px;
@@ -123,7 +124,7 @@ const HiddenInput = styled.input`
   overflow: hidden;
   position: absolute;
   z-index: -1;
-`
+`;
 
 const StyledFileLabel = styled.label`
   display: flex;
@@ -137,7 +138,7 @@ const StyledFileLabel = styled.label`
   margin-bottom: 16px;
   font-weight: 600;
   cursor: pointer;
-`
+`;
 
 const StyledInput = styled.input`
   margin: 0 16px 16px 16px;
@@ -148,9 +149,9 @@ const StyledInput = styled.input`
   background-color: rgb(34, 50, 64, 0.9);
   color: #93d94e;
   box-shadow: inset 0px -4px 4px rgba(147, 217, 78, 1);
-`
+`;
 
 const StyledLabel = styled.label`
   font-size: 16px;
   font-weight: 600;
-`
+`;

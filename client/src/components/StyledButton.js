@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
 export default styled.button`
   display: flex;
@@ -34,4 +34,4 @@ export default styled.button`
       margin: 8px 16px 0 16px;
       padding: 16px;
     `}
-`
+`;

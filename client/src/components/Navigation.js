@@ -1,8 +1,8 @@
-import { ReactComponent as UploadIcon } from '../svg/upload.svg'
-import { ReactComponent as GalleryIcon } from '../svg/gallery.svg'
+import { ReactComponent as UploadIcon } from '../svg/upload.svg';
+import { ReactComponent as GalleryIcon } from '../svg/gallery.svg';
 
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 export default function Navigation() {
   return (
@@ -15,7 +15,7 @@ export default function Navigation() {
         Upload
       </StyledLink>
     </StyledNav>
-  )
+  );
 }
 
 const StyledLink = styled(NavLink)`
@@ -35,7 +35,7 @@ const StyledLink = styled(NavLink)`
     color: #60bf81;
     padding-top: 16px;
   }
-`
+`;
 
 const StyledNav = styled.div`
   display: flex;
@@ -45,4 +45,4 @@ const StyledNav = styled.div`
   width: 100%;
   position: fixed;
   bottom: 0;
-`
+`;
