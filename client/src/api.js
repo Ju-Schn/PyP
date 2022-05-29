@@ -1,6 +1,6 @@
 const API_URL = process.env.REACT_APP_API_URL
 
-export default async function getImages(nextCursor) {
+export async function getImages(nextCursor) {
   const params = new URLSearchParams()
 
   if (nextCursor) {
