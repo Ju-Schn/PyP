@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
-import { getImages, getTags } from '../api';
+import { getImages, getTags, searchImages } from '../api';
 
 import StyledButton from '../components/StyledButton';
 import { ReactComponent as MoreIcon } from '../svg/more.svg';
@@ -36,23 +36,27 @@ export default function Gallery() {
   return (
     <GridContatiner>
       <StyledTitle>PyP - Your Gallery</StyledTitle>
-      <label htmlFor="tagsFilter">
-        <ScreenReaderOnly>Filter by tag:</ScreenReaderOnly>
-      </label>
-      <select
-        onChange={handleChange}
-        id="tagsFilter"
-        name="tags"
-        type="text"
-        value={selectedTag}
-      >
-        <option value="">Choose a tag to filter:</option>
-        {allTags?.map(tag => (
-          <option key={tag} value={tag}>
-            {tag}
-          </option>
-        ))}
-      </select>
+      <DropdownWrapper>
+        <label htmlFor="tagsFilter">
+          <ScreenReaderOnly>Filter by tag:</ScreenReaderOnly>
+        </label>
+        <StyledDropdown
+          onChange={handleChange}
+          id="tagsFilter"
+          name="tags"
+          type="text"
+          value={selectedTag}
+        >
+          <option value="">Choose a tag to filter:</option>
+          {allTags?.map(tag => (
+            <option key={tag} value={tag}>
+              {tag}
+            </option>
+          ))}
+        </StyledDropdown>
+        <StyledButton onClick={handleFilterImages}>filter</StyledButton>
+        <StyledButton onClick={handleResetFilter}>reset</StyledButton>
+      </DropdownWrapper>
       <GalleryGrid>
         {imageList.map(image => (
           <img key={image.asset_id} src={image.url} alt={image.publicId} />
@@ -72,6 +76,17 @@ export default function Gallery() {
     setSelectedTag(event.target.value);
   }
 
+  async function handleFilterImages() {
+    const responseJson = await searchImages(selectedTag, nextCursor);
+    setImageList(responseJson.resources);
+  }
+
+  async function handleResetFilter() {
+    const responseJson = await getImages();
+    setSelectedTag('');
+    setImageList(responseJson.resources);
+  }
+
   async function handleLoadMoreButtonClick() {
     const responseJson = await getImages(nextCursor);
     setImageList(currentImageList => [
@@ -81,6 +96,24 @@ export default function Gallery() {
     setNextCursor(responseJson.next_cursor);
   }
 }
+
+const DropdownWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+
+`;
+
+const StyledDropdown = styled.select`
+width: 60%;
+background-color: #223240;
+color: #60BF81;
+font-size:100%;
+font-weight: 600;
+border:none;
+border-radius: 30px;
+padding: 8px;
+`
 
 const GalleryGrid = styled.div`
   display: grid;
@@ -98,5 +131,5 @@ const GalleryGrid = styled.div`
 
 const GridContatiner = styled.div`
   display: grid;
-  grid-template-rows: 64px 0 40px auto 48px 88px;
+  grid-template-rows: 64px 56px auto 48px 88px;
 `;
