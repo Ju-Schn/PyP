@@ -11,7 +11,9 @@ app.use(json());
 
 const { parsed: config } = dotenv.config();
 
-const BASE_URL = `https://api.cloudinary.com/v1_1/${config.CLOUD_NAME}`;
+const BASE_URL = `https://api.cloudinary.com/v1_1/${config.CLOUD_NAME}/resources/image/`;
+const TAGS_URL = `https://api.cloudinary.com/v1_1/${config.CLOUD_NAME}/tags/image/`;
+const SEARCH_URL = `https://api.cloudinary.com/v1_1/${config.CLOUD_NAME}/resources/search`;
 
 const auth = {
   username: config.API_KEY,
@@ -19,7 +21,7 @@ const auth = {
 };
 
 app.get("/photos", async (req, res) => {
-  const response = await axios.get(BASE_URL + "/resources/image/", {
+  const response = await axios.get(BASE_URL, {
     auth,
     params: {
       next_cursor: req.query.next_cursor,
@@ -28,15 +30,15 @@ app.get("/photos", async (req, res) => {
   return res.send(response.data);
 });
 
-app.get("/tags", async (res) => {
-  const response = await axios.get(BASE_URL + "/tags/image/", {
+app.get("/tags", async (req, res) => {
+  const response = await axios.get(TAGS_URL, {
     auth,
   });
   return res.send(response.data);
 });
 
 app.get("/search", async (req, res) => {
-  const response = await axios.get(BASE_URL + "/resources/search", {
+  const response = await axios.get(SEARCH_URL, {
     auth,
     params: {
       expression: req.query.expression,
