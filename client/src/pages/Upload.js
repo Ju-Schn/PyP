@@ -33,7 +33,7 @@ export default function Upload() {
           </FlexWrapper>
         )}
         <StyledLabel htmlFor="tags">
-          Place up to three tags, devided by comma:
+          Place your tags, devided by comma:
         </StyledLabel>
         <StyledInput
           id="tags"
