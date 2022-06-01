@@ -5,6 +5,8 @@ import { getImages, getTags, searchImages } from '../api';
 
 import StyledButton from '../components/StyledButton';
 import { ReactComponent as MoreIcon } from '../svg/more.svg';
+import { ReactComponent as FilterIcon } from '../svg/filter.svg';
+import { ReactComponent as ResetIcon } from '../svg/reset.svg';
 import Navigation from '../components/Navigation';
 import StyledTitle from '../components/StyledTitle';
 import ScreenReaderOnly from '../components/ScreenReaderOnly';
@@ -36,7 +38,7 @@ export default function Gallery() {
   return (
     <GridContatiner>
       <StyledTitle>PyP - Your Gallery</StyledTitle>
-      <DropdownWrapper>
+      <StyledMain>
         <label htmlFor="tagsFilter">
           <ScreenReaderOnly>Filter by tag:</ScreenReaderOnly>
         </label>
@@ -54,19 +56,27 @@ export default function Gallery() {
             </option>
           ))}
         </StyledDropdown>
-        <StyledButton onClick={handleFilterImages}>filter</StyledButton>
-        <StyledButton onClick={handleResetFilter}>reset</StyledButton>
-      </DropdownWrapper>
-      <GalleryGrid>
-        {imageList.map(image => (
-          <img key={image.asset_id} src={image.url} alt={image.publicId} />
-        ))}
-      </GalleryGrid>
-      {nextCursor && (
-        <StyledButton onClick={handleLoadMoreButtonClick} variant="more">
-          <MoreIcon aria-hidden="true" /> Load More
-        </StyledButton>
-      )}
+        <DropdownWrapper>
+          <StyledButton onClick={handleFilterImages} variant="submit">
+            <FilterIcon aria-hidden='true'/>
+            filter
+          </StyledButton>
+          <StyledButton onClick={handleResetFilter} variant="reset">
+            <ResetIcon aria-hidden='true'/>
+            reset
+          </StyledButton>
+        </DropdownWrapper>
+        <GalleryGrid>
+          {imageList.map(image => (
+            <img key={image.asset_id} src={image.url} alt={image.publicId} />
+          ))}
+        </GalleryGrid>
+        {nextCursor && (
+          <StyledButton onClick={handleLoadMoreButtonClick} variant="more">
+            <MoreIcon aria-hidden="true" /> Load More
+          </StyledButton>
+        )}
+      </StyledMain>
       <Navigation />
     </GridContatiner>
   );
@@ -101,19 +111,19 @@ const DropdownWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 16px;
-
 `;
 
 const StyledDropdown = styled.select`
-width: 60%;
-background-color: #223240;
-color: #60BF81;
-font-size:100%;
-font-weight: 600;
-border:none;
-border-radius: 30px;
-padding: 8px;
-`
+  align-self: center;
+  width: 80%;
+  background-color: #223240;
+  color: #93D94E;
+  font-size: 100%;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  padding: 8px;
+`;
 
 const GalleryGrid = styled.div`
   display: grid;
@@ -131,5 +141,10 @@ const GalleryGrid = styled.div`
 
 const GridContatiner = styled.div`
   display: grid;
-  grid-template-rows: 64px 56px auto 48px 88px;
+  grid-template-rows: 64px auto 88px;
 `;
+
+const StyledMain = styled.main`
+display: flex;
+flex-direction: column;
+overflow-y: auto;`
