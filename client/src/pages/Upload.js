@@ -7,13 +7,14 @@ import StyledTitle from '../components/StyledTitle';
 import { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function Upload() {
   const [previewSource, setPreviewSource] = useState('');
   const [tagsList, setTagsList] = useState([]);
 
   return (
-    <>
+    <GridWrapper>
       <StyledTitle>PyP - Upload your Pictures</StyledTitle>
       <FlexForm arialabbeledby="form-title" onSubmit={handleSubmitFile}>
         <StyledFileLabel id="form-title" htmlFor="file">
@@ -29,7 +30,11 @@ export default function Upload() {
         {previewSource && (
           <FlexWrapper>
             <StyledText>Preview</StyledText>
-            <img src={previewSource} alt="chosen" style={{ width: '250px' }} />
+            <StyledImage
+              src={previewSource}
+              alt="chosen"
+              style={{ width: '200px' }}
+            />
           </FlexWrapper>
         )}
         <StyledLabel htmlFor="tags">
@@ -48,7 +53,7 @@ export default function Upload() {
         </StyledButton>
       </FlexForm>
       <Navigation />
-    </>
+    </GridWrapper>
   );
 
   function handleChange(event) {
@@ -79,6 +84,7 @@ export default function Upload() {
     if (!previewSource) return;
     uploadImage();
     form.reset();
+    toast.success('📸   successfully uploaded file   🎇');
   }
 
   function uploadImage() {
@@ -96,12 +102,23 @@ export default function Upload() {
   }
 }
 
+const GridWrapper = styled.section`
+  display: grid;
+  grid-template-rows: 64px auto 88px;
+`;
+
 const FlexWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: center;
   gap: 8px;
+  border-radius: 10px;
+  box-shadow: rgba(34, 50, 64, 0.9) 0px 7px 29px 0px;
   margin-bottom: 32px;
+  padding: 16px;
+  width: 80%;
+  background-color: #60bf81;
 `;
 
 const FlexForm = styled.form`
@@ -110,10 +127,11 @@ const FlexForm = styled.form`
   gap: 16px;
   justify-content: center;
   margin: 16px;
+  overflow-y: auto;
 `;
 
 const StyledText = styled.span`
-  font-weight: 600;
+  font-weight: 800;
   font-size: 24px;
 `;
 
@@ -154,4 +172,9 @@ const StyledInput = styled.input`
 const StyledLabel = styled.label`
   font-size: 16px;
   font-weight: 600;
+`;
+
+const StyledImage = styled.img`
+  width: '200px';
+  object-fit: cover;
 `;
