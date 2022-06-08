@@ -58,11 +58,11 @@ export default function Gallery() {
         </StyledDropdown>
         <DropdownWrapper>
           <StyledButton onClick={handleFilterImages} variant="submit">
-            <FilterIcon aria-hidden='true'/>
+            <FilterIcon aria-hidden="true" />
             filter
           </StyledButton>
           <StyledButton onClick={handleResetFilter} variant="reset">
-            <ResetIcon aria-hidden='true'/>
+            <ResetIcon aria-hidden="true" />
             reset
           </StyledButton>
         </DropdownWrapper>
@@ -117,7 +117,7 @@ const StyledDropdown = styled.select`
   align-self: center;
   width: 80%;
   background-color: #223240;
-  color: #93D94E;
+  color: #93d94e;
   font-size: 100%;
   font-weight: 600;
   border: none;
@@ -145,6 +145,7 @@ const GridContatiner = styled.div`
 `;
 
 const StyledMain = styled.main`
-display: flex;
-flex-direction: column;
-overflow-y: auto;`
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+`;

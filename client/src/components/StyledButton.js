@@ -20,7 +20,7 @@ export default styled.button`
       margin: 8px 0;
     `}
 
-    ${props =>
+  ${props =>
     props.variant === 'more' &&
     css`
       display: flex;
@@ -32,7 +32,7 @@ export default styled.button`
     props.variant === 'reset' &&
     css`
       background-color: #d92b04;
-      color: #070A0D;
+      color: #070a0d;
       margin: 8px 0;
     `}
 `;
