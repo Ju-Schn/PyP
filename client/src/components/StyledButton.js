@@ -25,7 +25,7 @@ export default styled.button`
     css`
       display: flex;
       justify-content: center;
-      margin: 0 16px;
+      margin: 8px 16px;
     `}
 
     ${props =>
