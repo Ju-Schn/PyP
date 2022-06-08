@@ -19,14 +19,14 @@ Submit.args = {
   variant: 'submit',
 };
 
-export const FullWidth = Template.bind({});
-FullWidth.args = {
-  children: 'FullWidth',
-  variant: 'fullWidth',
-};
-
 export const More = Template.bind({});
 More.args = {
   children: 'show more',
   variant: 'more',
+};
+
+export const Reset = Template.bind({});
+Reset.args = {
+  children: 'reset',
+  variant: 'reset',
 };
