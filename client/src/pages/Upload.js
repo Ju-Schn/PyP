@@ -7,13 +7,14 @@ import StyledTitle from '../components/StyledTitle';
 import { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function Upload() {
   const [previewSource, setPreviewSource] = useState('');
   const [tagsList, setTagsList] = useState([]);
 
   return (
-    <>
+    <GridWrapper>
       <StyledTitle>PyP - Upload your Pictures</StyledTitle>
       <FlexForm arialabbeledby="form-title" onSubmit={handleSubmitFile}>
         <StyledFileLabel id="form-title" htmlFor="file">
@@ -48,7 +49,7 @@ export default function Upload() {
         </StyledButton>
       </FlexForm>
       <Navigation />
-    </>
+    </GridWrapper>
   );
 
   function handleChange(event) {
@@ -79,6 +80,7 @@ export default function Upload() {
     if (!previewSource) return;
     uploadImage();
     form.reset();
+    toast.success('📸   successfully uploaded file   🎇')
   }
 
   function uploadImage() {
@@ -96,12 +98,18 @@ export default function Upload() {
   }
 }
 
+const GridWrapper = styled.section`
+display: grid;
+grid-template-rows: 64px auto 88px;
+`;
+
 const FlexWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   margin-bottom: 32px;
+  overflow-y: auto;
 `;
 
 const FlexForm = styled.form`
