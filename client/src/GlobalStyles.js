@@ -6,6 +6,23 @@ export default createGlobalStyle`
   
 }
 
+:root {
+  --toastify-color-info: #3498db;
+  --toastify-color-success: #60bf81;
+  --toastify-color-warning: #f1c40f;
+  --toastify-color-error: #d92b04;
+  --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+
+  --toastify-toast-width: 350px;
+  --toastify-font-family: inherit;
+
+  --toastify-text-color-info: #fff;
+  --toastify-text-color-success: #223240;
+  --toastify-text-color-warning: #fff;
+  --toastify-text-color-error: #f4e9c9;
+
+}
+
 body {
   margin: 0;
   padding: 0;
