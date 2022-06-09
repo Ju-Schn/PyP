@@ -49,7 +49,7 @@ export default function Gallery() {
           type="text"
           value={selectedTag}
         >
-          <option value="">Choose a tag to filter:</option>
+          <option value="">Choose tag to filter:</option>
           {allTags?.map(tag => (
             <option key={tag} value={tag}>
               {tag}
